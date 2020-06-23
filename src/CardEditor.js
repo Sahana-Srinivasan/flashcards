@@ -7,7 +7,7 @@ import {Table} from 'react-bootstrap';
 class CardEditor extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {front: '', back: '', cards: this.props.cards.slice()};
+        this.state = {front: '', back: ''};
     }
 
 
@@ -20,12 +20,8 @@ class CardEditor extends React.Component {
             alert('Please fill the front and back of the card');
         }
         else {
-            const card = {front: this.state.front, back: this.state.back};
-            console.log(card);
-            this.props.addCard({front: this.state.front, back: this.state.back});
+            this.props.addCard(this.state);
             this.setState({front: '', back: ''});
-            const cards = this.state.cards.slice().concat(card);
-            this.setState({cards});
         }
     }
 
@@ -34,16 +30,13 @@ class CardEditor extends React.Component {
             alert('You can\'t delete all your cards!');
         }
         else {
-            const cards = this.state.cards.slice();
-            cards.splice(index, 1);
-            this.setState({cards});
             this.props.deleteCard(index);
         }
     }
 
 
     editCard = (event, index) => {
-        const cards = this.state.cards.slice();
+        const cards = this.props.cards.slice();
         var edited = cards.splice(index, 1);
         if (event.target.name === "frontedit") {
             edited[0].front = event.target.value;
@@ -53,14 +46,13 @@ class CardEditor extends React.Component {
         }
         const edit = edited.slice();
         cards.splice(index, 0, edit[0]);
-        this.setState({cards});
         this.props.editCard(cards);
     }
 
 
 
     render() {
-        var cards = this.state.cards.map((card, index) => {
+        var cards = this.props.cards.map((card, index) => {
             return (
                 <tr key={index}>
                     <td>{index + 1}</td>
