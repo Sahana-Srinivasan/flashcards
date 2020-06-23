@@ -31,6 +31,10 @@ class App extends React.Component {
     this.setState({editor: !this.state.editor});
   }
 
+  editCard = cards => {
+    this.setState({cards});
+  }
+
   render () {
 
       if (this.state.editor) {
@@ -40,7 +44,9 @@ class App extends React.Component {
               addCard={this.addCard} 
               deleteCard={this.deleteCard} 
               cards={this.state.cards}
-              switchMode = {this.switchMode}/>
+              switchMode = {this.switchMode}
+              editCard = {this.editCard}
+            />
           </div>
         );
       }

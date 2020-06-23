@@ -67,6 +67,7 @@ class CardViewer extends React.Component {
         return (
             <div>
                 <h2>Card Viewer</h2>
+                <br/>
                 <Card id="flashcard" onClick={this.flip}>
                     <Card.Body>
                         <Card.Text>

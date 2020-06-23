@@ -7,7 +7,7 @@ import {Table} from 'react-bootstrap';
 class CardEditor extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {front: '', back: ''}
+        this.state = {front: '', back: '', cards: this.props.cards.slice()};
     }
 
 
@@ -27,20 +27,48 @@ class CardEditor extends React.Component {
 
     deleteCard = index => {
         if (this.props.cards.length === 1) {
-            alert('You can\'t delete all your cards!')
+            alert('You can\'t delete all your cards!');
         }
         else {
             this.props.deleteCard(index);
         }
     }
 
+
+    editCard = (event, index) => {
+        const cards = this.state.cards.slice();
+        var edited = cards.splice(index, 1);
+        if (event.target.name === "frontedit") {
+            edited[0].front = event.target.value;
+        }
+        else {
+            edited[0].back = event.target.value;
+        }
+        const edit = edited.slice();
+        cards.splice(index, 0, edit[0]);
+        this.setState({cards});
+        this.props.editCard(cards);
+    }
+
+
+
     render() {
-        const cards = this.props.cards.map((card, index) => {
+        var cards = this.state.cards.map((card, index) => {
             return (
                 <tr key={index}>
                     <td>{index + 1}</td>
-                    <td>{card.front}</td>
-                    <td>{card.back}</td>
+                    <td>
+                    <input 
+                        name={"frontedit"}
+                        onChange={(e) => this.editCard(e, index)} 
+                        value={card.front}/>
+                    </td>
+                    <td>
+                    <input 
+                        name={"backedit"}
+                        onChange={(e) => this.editCard(e, index)} 
+                        value={card.back}/>
+                    </td>
                     <td>
                         <Button variant="light" onClick={() => this.deleteCard(index)}>Delete</Button>
                     </td>
@@ -51,6 +79,7 @@ class CardEditor extends React.Component {
         return (
             <div>
                 <h2>Card Editor</h2>
+                <br/>
                 <Table id ="card-table" striped bordered hover size="sm" responsive>
                     <thead>
                         <tr>
