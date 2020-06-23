@@ -56,14 +56,16 @@ class CardViewer extends React.Component {
         var cards = this.props.cards.slice()
         var currCard = cards.splice(this.state.current, 1)[0]
         const current = this.state.current;
-        let next; 
-        if (current < this.props.cards.length - 1) {
-            next = <Button variant="secondary" id="change-card" onClick={this.nextCard}>Next</Button>
-        }
-        let prev; 
-        if (current !== 0) {
-            prev = <Button variant="secondary" id="change-card" onClick={this.prevCard}>Prev</Button>
-        }
+        var first = (current === 0);
+        var last = (current === this.props.cards.length - 1);
+        // let next; 
+        // if (current < this.props.cards.length - 1) {
+        //     next = <Button variant="secondary" id="change-card" onClick={this.nextCard}>Next</Button>
+        // }
+        // let prev; 
+        // if (current !== 0) {
+        //     prev = <Button variant="secondary" id="change-card" onClick={this.prevCard}>Prev</Button>
+        // }
         return (
             <div>
                 <h2>Card Viewer</h2>
@@ -78,8 +80,8 @@ class CardViewer extends React.Component {
                 <br/>
                 Flashcard {current + 1} of {this.props.cards.length}
                 <br/>
-                {prev}
-                {next}
+                <Button variant="secondary" id="change-card" onClick={this.prevCard} disabled={first}>Prev</Button>
+                <Button variant="secondary" id="change-card" onClick={this.nextCard} disabled={last}>Next</Button>
                 <Button variant="secondary" id="change-card" onClick={this.randomCard}>Random</Button>
                 <br/>
                 <br/>
