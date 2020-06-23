@@ -20,8 +20,12 @@ class CardEditor extends React.Component {
             alert('Please fill the front and back of the card');
         }
         else {
-            this.props.addCard(this.state);
+            const card = {front: this.state.front, back: this.state.back};
+            console.log(card);
+            this.props.addCard({front: this.state.front, back: this.state.back});
             this.setState({front: '', back: ''});
+            const cards = this.state.cards.slice().concat(card);
+            this.setState({cards});
         }
     }
 
@@ -30,6 +34,9 @@ class CardEditor extends React.Component {
             alert('You can\'t delete all your cards!');
         }
         else {
+            const cards = this.state.cards.slice();
+            cards.splice(index, 1);
+            this.setState({cards});
             this.props.deleteCard(index);
         }
     }
