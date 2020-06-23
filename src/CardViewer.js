@@ -58,14 +58,6 @@ class CardViewer extends React.Component {
         const current = this.state.current;
         var first = (current === 0);
         var last = (current === this.props.cards.length - 1);
-        // let next; 
-        // if (current < this.props.cards.length - 1) {
-        //     next = <Button variant="secondary" id="change-card" onClick={this.nextCard}>Next</Button>
-        // }
-        // let prev; 
-        // if (current !== 0) {
-        //     prev = <Button variant="secondary" id="change-card" onClick={this.prevCard}>Prev</Button>
-        // }
         return (
             <div>
                 <h2>Card Viewer</h2>
