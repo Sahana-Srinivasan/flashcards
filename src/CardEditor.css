@@ -1,0 +1,26 @@
+table,
+td,
+th {
+    border: 1px solid black;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td, 
+th {
+    padding: 10px;
+}
+
+#card-table {
+    width: 50vw;
+}
+
+input {
+    margin: 5px !important;
+}
+
+Button {
+    margin: 5px !important;
+}
